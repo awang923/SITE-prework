@@ -6,7 +6,7 @@ Submitted by: Annie Wang
 
 Time spent: 5.5 hours spent in total
 
-Link to project: (insert your link here, should start with https://glitch.com...)
+Link to project: https://github.com/awang923/SITE-prework
 
 ## Required Functionality
 
