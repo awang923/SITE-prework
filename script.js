@@ -12,6 +12,7 @@ var volume = 0.5;
 var guessCounter = 0;
 var tries = 3;
 var clueHoldTime = 800;
+var t;
 
 var errorAud = new Audio("https://cdn.glitch.com/3401d1a5-03b6-42fd-ab32-3dd8a6511d87%2Ferror.mp3?v=1616391471173");
 
@@ -26,6 +27,8 @@ function easy(){
     pattern.push(Math.floor(Math.random() * Math.floor(4))+1);
   }
   console.log(pattern);
+  t = 180;
+  console.log(t)
 }
 function hard(){
   document.getElementById("hardBtn").classList.add("hidden");
@@ -38,23 +41,9 @@ function hard(){
     pattern.push(Math.floor(Math.random() * Math.floor(5))+1);
   }
   console.log(pattern);
+  t = 360;
+  console.log(t)
 }
-
-// function init(){
-//   //take away sound
-//   console.log("init");
-//   gamePlaying = false;
-//   if (gamePlaying == false){
-//     document.getElementById("button1").addEventListener("mousedown", startTone(1));
-//     document.getElementById("button1").addEventListener("mouseup", stopTone());
-//     document.getElementById("button2").addEventListener("mousedown", startTone(2));
-//     document.getElementById("button2").addEventListener("mouseup", stopTone());
-//     document.getElementById("button3").addEventListener("mousedown", startTone(3));
-//     document.getElementById("button3").addEventListener("mouseup", stopTone());
-//     document.getElementById("button4").addEventListener("mousedown", startTone(4));
-//     document.getElementById("button4").addEventListener("mouseup", stopTone());
-//   }
-// }
 
 function startGame(){
   //initalize game variables
@@ -66,12 +55,13 @@ function startGame(){
   document.getElementById("heart0").setAttribute('src', 'https://cdn.glitch.com/3401d1a5-03b6-42fd-ab32-3dd8a6511d87%2Fheart.png?v=1616389777728');
   document.getElementById("heart1").setAttribute('src', 'https://cdn.glitch.com/3401d1a5-03b6-42fd-ab32-3dd8a6511d87%2Fheart.png?v=1616389777728');
   document.getElementById("heart2").setAttribute('src', 'https://cdn.glitch.com/3401d1a5-03b6-42fd-ab32-3dd8a6511d87%2Fheart.png?v=1616389777728');
-  
   //swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   playClueSequence();
   console.log("game started");
+  document.getElementById("time").classList.remove("hidden");
+  timer(t);
 }
 
 function stopGame(){
@@ -85,7 +75,10 @@ function stopGame(){
   document.getElementById("heart").classList.add("hidden");
   document.getElementById("easy").classList.add("hidden");
   document.getElementById("hard").classList.add("hidden");
+  document.getElementById("time").classList.add("hidden");
   pattern=[];
+  t = 0;
+  //clearInterval();
 }
 
 // Sound Synthesis Functions
@@ -114,7 +107,7 @@ function startTone(btn){
 }
 function stopTone(){
     g.gain.setTargetAtTime(0,context.currentTime + 0.05,0.025)
-    tonePlaying = false
+    tonePlaying = false;
 }
 
 //Page Initialization
@@ -153,8 +146,8 @@ function playClueSequence(){
   }
   clueHoldTime -= 80;
   console.log(clueHoldTime);
-  console.log("played");
 }
+
 
 function loseGame(){
   stopGame();
@@ -177,6 +170,7 @@ function guess(btn){
     return;
   }
   // add game logic here
+  //var time = 10;
   if (btn == pattern[guessCounter] && guessCounter == progress){
     document.getElementById("button"+btn).addEventListener("mousedown", tone(btn));
     if(progress == pattern.length-1){
@@ -198,4 +192,34 @@ function guess(btn){
       loseGame();
     }
   }
+}
+
+//timer
+function timer(time){
+  setInterval(function countdown(){
+    time--;
+    console.log("time starts");
+    
+    var min = Math.floor(time/60);
+    var sec = time - (min*60);
+    
+    if(time >= 0){
+      document.getElementById("timer").innerHTML = min + ":" + sec;
+    }
+    if(time == 0){
+      clearInterval(time);
+      loseGame();
+      console.log("time stops");
+    }
+    document.getElementById("stopBtn").addEventListener("click", function(){
+      clearInterval(time);
+      console.log("yeet");
+      time = 0;
+      stopGame();
+    })
+    // if(document.getElementById("stopBtn").onclick == true){
+    //   console.log("yeet")
+    //   clearInterval(time);
+    // }
+  }, 1000);
 }
