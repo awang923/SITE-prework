@@ -19,6 +19,8 @@
     <p>
       Welcome to <i>Test Your Memory</i>, good luck and have fun!
     </p>
+    
+    
     <button id="easyBtn" onclick="easy()">
       Easy
     </button>
@@ -33,12 +35,20 @@
       <img id="heart1" src="https://cdn.glitch.com/3401d1a5-03b6-42fd-ab32-3dd8a6511d87%2Fheart.png?v=1616389777728" alt="heart1">
       <img id="heart2" src="https://cdn.glitch.com/3401d1a5-03b6-42fd-ab32-3dd8a6511d87%2Fheart.png?v=1616389777728" alt="heart2">
     </div>
+      
+    
     <button id="startBtn" class="hidden" onclick="startGame()">
       <b>Start</b>
     </button>
     <button id="stopBtn" class="hidden" onclick="stopGame()">
       <b>Stop</b>
     </button>
+    
+    <div id="time" class="hidden">
+      <a>Time Left: </a><a id="timer"></a>
+    </div>
+
+    
     <div id="gameButtonArea">
       <button id="button1" onmousedown="startTone(1)" onmouseup="stopTone()" onclick="guess(1)"></button>
       <button id="button2" onmousedown="startTone(2)" onmouseup="stopTone()" onclick="guess(2)"></button>
