@@ -6,7 +6,7 @@ Submitted by: Annie Wang
 
 Time spent: 5.5 hours spent in total
 
-Link to project: (insert your link here, should start with https://glitch.com...)
+Link to project: https://glitch.com/edit/#!/standing-foregoing-judo
 
 ## Required Functionality
 
